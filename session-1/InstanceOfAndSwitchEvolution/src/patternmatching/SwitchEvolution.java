@@ -78,7 +78,7 @@ public class SwitchEvolution {
   }
 
   /**
-   * e.g. Conditionals on object after JDK 17 (finalised) :
+   * e.g. Conditionals on object after JDK 17 (preview) :
    * switch can support nulls, objects, type pattern matching with guarded pattern
    * @param animal we're performing conditional checks on this object
    * @return sound that animal makes
