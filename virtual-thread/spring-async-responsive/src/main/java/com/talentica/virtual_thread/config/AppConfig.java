@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ForkJoinPool;
 
 /*
 By default, Spring will be searching for an associated thread pool definition: either unique org.springframework.core.task.TaskExecutor bean in the context, or an java.util.concurrent.Executor bean named "taskExecutor" otherwise.
@@ -20,6 +21,7 @@ public class AppConfig {
 
     @Bean
     Executor taskExecutor() {
-        return Executors.newFixedThreadPool(100);
+        return Executors.newFixedThreadPool(1);
+        //return ForkJoinPool.commonPool();
     }
 }

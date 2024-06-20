@@ -11,27 +11,27 @@ import java.util.concurrent.ExecutionException;
 public class PatternController {
 
     @Autowired
-    PatternService patternService;
+    DependentCallsService dependentCallsService;
+
+    @Autowired
+    IndependentCallsService independentCallsService;
 
     @GetMapping("/fanout/wrong")
     public MessageWithDelay fanoutWrong() {
-        return patternService.fanoutWrong();
+        return independentCallsService.fanoutWrong();
     }
     @GetMapping("/fanout/right")
     public MessageWithDelay fanoutRight() {
-        return patternService.fanoutRight();
+        return independentCallsService.fanoutRight();
     }
 
-    /**
-     * Not wrong as such, but won't be a performance improvement in case of virtual threads
-     * @return
-     */
-    @GetMapping("/async/wrong")
+
+    @GetMapping("/dependent/wrong")
     public MessageWithDelay asyncNonBlockingStyle() {
-        return patternService.asyncNonBlockingStyle();
+        return dependentCallsService.asyncNonBlockingStyle();
     }
-    @GetMapping("/async/right")
+    @GetMapping("/dependent/right")
     public MessageWithDelay syncBlockingStyle() throws ExecutionException, InterruptedException {
-        return patternService.syncBlockingStyle();
+        return dependentCallsService.syncBlockingStyle();
     }
 }

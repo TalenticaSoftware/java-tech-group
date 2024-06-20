@@ -25,6 +25,8 @@
 		<module>virtual-thread-other-pattern</module>
 		<module>old-spring-boot</module>
 		<module>thread-local</module>
+		<module>servlet-async</module>
+		<module>spring-async-responsive</module>
 	</modules>
 
 </project>

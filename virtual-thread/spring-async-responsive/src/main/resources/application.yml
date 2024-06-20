@@ -1,0 +1,12 @@
+server:
+  port: 8100
+  application:
+    name: "thread-per-task"
+  tomcat:
+    #connection-timeout: 2s # default is 20s, too much for cloud native, property defines a limit for how much time Tomcat should wait between accepting a TCP connection from a client and actually receiving the HTTP request. It helps prevent denial-of-service (DoS) attacks where a connection is established, Tomcat reserves a thread to handle the request, and the request never comes.
+    #keep-alive-timeout: 15s # property to configure how long to keep a connection open while waiting for new HTTP requests.
+    accept-count: 500 # Once maxConnections has been reached the operating system will queue further connections. The size of the operating system provided connection queue may be controlled by the acceptCount attribute. If the operating system queue fills, further connection requests may be refused or may time out.
+    max-connections: 500 # threads.max - max-connection = 0, so 0 request will be put in tomcat queue. This also show max conncurrent number of connections.
+    threads:
+      max: 1 #  maximum number of request processing threads
+      min-spare: 1 #minimum number of threads that should always be kept running
