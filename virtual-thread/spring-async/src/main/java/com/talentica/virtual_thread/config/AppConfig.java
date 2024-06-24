@@ -15,7 +15,7 @@ Now if you want to provide your own customization, you can define (implement) an
 
 Reference: https://stackoverflow.com/questions/57988341/what-are-the-defaults-in-spring-async
  */
-//@Configuration
+@Configuration
 public class AppConfig {
 
     @Bean

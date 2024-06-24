@@ -10,6 +10,13 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+/*
+references :
+    https://www.javacodegeeks.com/2013/05/java-8-definitive-guide-to-completablefuture.html
+    https://spring.io/blog/2012/05/07/spring-mvc-3-2-preview-introducing-servlet-3-async-support
+    https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-async.html
+
+ */
 @Service
 public class DemoService {
     //@Autowired
