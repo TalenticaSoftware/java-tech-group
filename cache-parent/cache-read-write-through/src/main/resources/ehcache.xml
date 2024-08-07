@@ -1,0 +1,16 @@
+<config
+  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+  xmlns='http://www.ehcache.org/v3'
+  xsi:schemaLocation="
+        http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd">
+
+  <cache alias="productCache">
+    <key-type>java.lang.String</key-type>
+    <value-type>com.tal.demo.model.Product</value-type>
+    <loader-writer>
+      <class>com.tal.demo.cache.ProductCacheLoaderWriter</class>
+    </loader-writer>
+    <heap unit="entries">100</heap>
+  </cache>
+
+</config>

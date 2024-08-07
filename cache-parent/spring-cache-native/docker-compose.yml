@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app1:
+    image: docker.io/library/spring-cache-native
+    ports:
+      - "8080:8080"
+    # depends_on:
+    #   - terracotta  
+    # links:
+    #   - terracotta
+  app2:
+    image: docker.io/library/spring-cache-native
+    ports:
+      - "9080:8080"
+    # depends_on:
+    #   - terracotta  
+    # links:
+    #   - terracotta
+  # terracotta:
+  #   image: terracotta/ehcache-terracotta-server:3.10.8
+  #   platform: linux/amd64
+  #   ports:
+  #     - "9410:9410"
+  #     - "9540:9540"
+  #     - "9530:9530"
+  #   environment:
+  #     - DEFAULT_ACTIVATE=true      

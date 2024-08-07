@@ -1,0 +1,35 @@
+<ehcache:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ehcache="http://www.ehcache.org/v3"
+        xmlns:tc="http://www.ehcache.org/v3/clustered"
+        xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core.xsd">
+
+  <ehcache:cache alias="productsCache">
+    <ehcache:key-type>java.lang.Integer</ehcache:key-type>
+    <ehcache:value-type>com.tal.cache.model.Product</ehcache:value-type>
+    <ehcache:heap unit="entries">100</ehcache:heap>
+  </ehcache:cache>
+
+<!-- 
+   <ehcache:service>
+    <tc:cluster>
+      <tc:connection url="terracotta://terracotta:9410/my-cache-manager-name"/>
+      <tc:server-side-config client-mode="auto-create"/>
+    </tc:cluster>
+  </ehcache:service> 
+
+  <ehcache:cache alias="productsCache">
+    <ehcache:key-type>java.lang.Integer</ehcache:key-type>
+    <ehcache:value-type>com.tal.cache.model.Product</ehcache:value-type>
+    <ehcache:resources>
+      <tc:clustered-dedicated from="offheap-1" unit="MB">8</tc:clustered-dedicated>
+    </ehcache:resources>
+     <ehcache:management>
+      <enabled>true</enabled>
+    </ehcache:management>
+    <ehcache:statistics>
+      <enabled>true</enabled>
+    </ehcache:statistics>
+  </ehcache:cache> -->
+
+
+</ehcache:config>

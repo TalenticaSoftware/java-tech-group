@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  redis-cluster-node-1:
+    image: docker.io/bitnami/redis-cluster:latest
+    container_name: redis-cluster-node-1
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_NODES=redis-cluster-node-1:6379,redis-cluster-node-2:6379,redis-cluster-node-3:6379
+    networks:
+      - redis-cluster-network
+    ports:
+      - "6379:6379"
+
+  redis-cluster-node-2:
+    image: docker.io/bitnami/redis-cluster:latest
+    container_name: redis-cluster-node-2
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_NODES=redis-cluster-node-1:6379,redis-cluster-node-2:6379,redis-cluster-node-3:6379
+    networks:
+      - redis-cluster-network
+    ports:
+      - "6380:6379"
+
+  redis-cluster-node-3:
+    image: docker.io/bitnami/redis-cluster:latest
+    container_name: redis-cluster-node-3
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_NODES=redis-cluster-node-1:6379,redis-cluster-node-2:6379,redis-cluster-node-3:6379
+    networks:
+      - redis-cluster-network
+    ports:
+      - "6381:6379"
+
+  redis-cluster-init:
+    image: redis:7.2-alpine
+    container_name: redis-cluster-init
+    entrypoint: ["/bin/sh", "-c", "/usr/local/bin/entrypoint.sh"]
+    networks:
+      - redis-cluster-network
+    depends_on:
+      - redis-cluster-node-1
+      - redis-cluster-node-2
+      - redis-cluster-node-3
+    volumes:
+      - ./entrypoint.sh:/usr/local/bin/entrypoint.sh    
+
+  app:
+    image: docker.io/library/cache-clustered
+    ports:
+     - "8080:8080"
+    depends_on:
+      - redis-cluster-node-1
+      - redis-cluster-node-2
+      - redis-cluster-node-3
+    networks:
+      - redis-cluster-network
+    environment:
+      - SPRING_REDIS_CLUSTER_NODES=redis-cluster-node-1:6379,redis-cluster-node-2:6379,redis-cluster-node-3:6379
+    ports:
+      - "8080:8080"
+
+networks:
+  redis-cluster-network:
+    driver: bridge
+
+#docker exec -it redis-cluster-node-2 redis-cli
