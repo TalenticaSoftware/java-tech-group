@@ -6,6 +6,7 @@ import com.talentica.services.department.DepartmentDTO;
 import com.talentica.services.department.DepartmentExternalAPI;
 import com.talentica.services.department.DepartmentInternalAPI;
 import com.talentica.services.department.mapper.DepartmentMapper;
+import com.talentica.services.department.model.Department;
 import com.talentica.services.department.repository.DepartmentRepository;
 import com.talentica.services.employee.EmployeeDTO;
 import com.talentica.services.employee.EmployeeInternalAPI;
@@ -18,14 +19,14 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class DepartmentManagementService implements DepartmentInternalAPI, DepartmentExternalAPI {
 
-  //  private static final Logger LOG = LoggerFactory.getLogger(DepartmentManagementService.class);
   private final DepartmentRepository repository;
   private final EmployeeInternalAPI employeeManagementService;
   private final DepartmentMapper mapper;
 
   public DepartmentManagementService(DepartmentRepository repository,
       EmployeeInternalAPI employeeInternalAPI,
-      DepartmentMapper mapper) {
+      DepartmentMapper mapper
+  ) {
     this.repository = repository;
     this.employeeManagementService = employeeInternalAPI;
     this.mapper = mapper;

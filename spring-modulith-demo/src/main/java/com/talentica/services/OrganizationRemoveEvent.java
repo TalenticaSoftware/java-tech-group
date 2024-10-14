@@ -1,10 +1,5 @@
 package com.talentica.services;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Setter
-@Getter
 public class OrganizationRemoveEvent {
 
   private Long id;
@@ -13,4 +8,11 @@ public class OrganizationRemoveEvent {
     this.id = id;
   }
 
+  public Long getId() {
+    return this.id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
 }
