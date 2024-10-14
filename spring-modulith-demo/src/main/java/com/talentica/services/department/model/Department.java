@@ -4,11 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
 
-@Setter
-@Getter
 @Entity
 public class Department {
 
@@ -26,4 +22,27 @@ public class Department {
     this.name = name;
   }
 
+  public Long getId() {
+    return this.id;
+  }
+
+  public Long getOrganizationId() {
+    return this.organizationId;
+  }
+
+  public String getName() {
+    return this.name;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public void setOrganizationId(Long organizationId) {
+    this.organizationId = organizationId;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 }
