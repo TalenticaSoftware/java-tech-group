@@ -50,6 +50,11 @@ public class GatewayManagementService {
     return employeeExternalAPI.add(employee);
   }
 
+  @GetMapping("/employee/report/{id}/")
+  public String apiAddEmployee(@PathVariable Long id) {
+    return employeeExternalAPI.getEmployeeReport(id);
+  }
+
   @GetMapping("/departments/{id}/with-employees")
   public DepartmentDTO apiDepartmentWithEmployees(@PathVariable("id") Long id) {
     return departmentExternalAPI.getDepartmentByIdWithEmployees(id);

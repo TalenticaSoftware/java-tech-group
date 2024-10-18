@@ -6,7 +6,6 @@ import com.talentica.services.department.DepartmentDTO;
 import com.talentica.services.department.DepartmentExternalAPI;
 import com.talentica.services.department.DepartmentInternalAPI;
 import com.talentica.services.department.mapper.DepartmentMapper;
-import com.talentica.services.department.model.Department;
 import com.talentica.services.department.repository.DepartmentRepository;
 import com.talentica.services.employee.EmployeeDTO;
 import com.talentica.services.employee.EmployeeInternalAPI;
@@ -20,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class DepartmentManagementService implements DepartmentInternalAPI, DepartmentExternalAPI {
 
   private final DepartmentRepository repository;
-  private final EmployeeInternalAPI employeeManagementService;
+  private final EmployeeInternalAPI employeeInternalAPI;
   private final DepartmentMapper mapper;
 
   public DepartmentManagementService(DepartmentRepository repository,
@@ -28,14 +27,14 @@ public class DepartmentManagementService implements DepartmentInternalAPI, Depar
       DepartmentMapper mapper
   ) {
     this.repository = repository;
-    this.employeeManagementService = employeeInternalAPI;
+    this.employeeInternalAPI = employeeInternalAPI;
     this.mapper = mapper;
   }
 
   @Override
   public DepartmentDTO getDepartmentByIdWithEmployees(Long id) {
     DepartmentDTO d = repository.findDTOById(id);
-    List<EmployeeDTO> dtos = employeeManagementService.getEmployeesByDepartmentId(id);
+    List<EmployeeDTO> dtos = employeeInternalAPI.getEmployeesByDepartmentId(id);
     d.employees().addAll(dtos);
     return d;
   }
@@ -44,9 +43,9 @@ public class DepartmentManagementService implements DepartmentInternalAPI, Depar
   void onNewOrganizationEvent(OrganizationAddEvent event) throws Exception {
     log.info("onNewOrganizationEvent(orgId={})", event.getId());
 
-//    if (event != null) {
-//      throw new Exception("failed due to some reason");
-//    }
+    if (true) {
+      throw new Exception("failed due to some reason");
+    }
     add(new DepartmentDTO(null, event.getId(), "HR"));
     add(new DepartmentDTO(null, event.getId(), "Management"));
   }
@@ -73,7 +72,7 @@ public class DepartmentManagementService implements DepartmentInternalAPI, Depar
   public List<DepartmentDTO> getDepartmentsByOrganizationIdWithEmployees(Long id) {
     List<DepartmentDTO> departments = repository.findByOrganizationId(id);
     for (DepartmentDTO dep : departments) {
-      dep.employees().addAll(employeeManagementService.getEmployeesByDepartmentId(dep.id()));
+      dep.employees().addAll(employeeInternalAPI.getEmployeesByDepartmentId(dep.id()));
     }
     return departments;
   }
